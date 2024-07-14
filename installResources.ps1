@@ -1,0 +1,1 @@
+echo pip install pyinstaller pyqt5 > installResources.ps1
