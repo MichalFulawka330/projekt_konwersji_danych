@@ -1,1 +1,23 @@
+name: Build and Upload EXE
 
+on: [push]
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: Install Dependencies
+      run: |
+        pip install pyinstaller pyyaml
+    - name: Build EXE
+      run: pyinstaller --onefile --noconsole project.py
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: compiled-app
+        path: dist/project.exe
